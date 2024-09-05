@@ -64,7 +64,7 @@ return [
     */
 
     'logo' => '<b>EFS Certificates</b>',
-    'logo_img' => asset('images/logo.jpeg'),
+    'logo_img' => env('APP_URL').'/images/logo.jpeg',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -86,7 +86,7 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => env('APP_URL').'/images/logo.jpeg',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,
@@ -113,8 +113,8 @@ return [
         'enabled' => true,
         'mode' => 'fullscreen',
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-            'alt' => 'AdminLTE Preloader Image',
+            'path' => env('APP_URL').'/images/logo.jpeg',
+            'alt' => 'Preloader Image',
             'effect' => 'animation__shake',
             'width' => 60,
             'height' => 60,
@@ -325,52 +325,50 @@ return [
         // ['header' => 'account_settings'],
         [
             'text' => 'Certificates',
-            'url' => 'admin/certificates',
-            'icon' => 'fas fa-fw fa-stamp',
+            'icon' => 'fas fa-fw fa-user',
+            'submenu' => [
+                [
+                    'text' => 'Add New',
+                    'url' => 'admin/certificates/create',
+                ],
+                [
+                    'text' => 'Import',
+                    'url' => 'admin/import',
+                ],
+                [
+                    'text' => 'List All',
+                    'url' => 'admin/certificates',
+                ]
+            ],
         ],
         [
-            'text' => 'Import Excel',
-            'url' => 'admin/import',
-            'icon' => 'fas fa-fw fa-upload',
+            'text' => 'Employees',
+            'icon' => 'fas fa-fw fa-user',
+            'submenu' => [
+                [
+                    'text' => 'Import',
+                    'url' => 'admin/import/employees',
+                ],
+                [
+                    'text' => 'List All',
+                    'url' => 'admin/employees',
+                ]
+            ],
         ],
-        // [
-        //     'text' => 'multilevel',
-        //     'icon' => 'fas fa-fw fa-share',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'level_one',
-        //             'url' => '#',
-        //         ],
-        //         [
-        //             'text' => 'level_one',
-        //             'url' => '#',
-        //             'submenu' => [
-        //                 [
-        //                     'text' => 'level_two',
-        //                     'url' => '#',
-        //                 ],
-        //                 [
-        //                     'text' => 'level_two',
-        //                     'url' => '#',
-        //                     'submenu' => [
-        //                         [
-        //                             'text' => 'level_three',
-        //                             'url' => '#',
-        //                         ],
-        //                         [
-        //                             'text' => 'level_three',
-        //                             'url' => '#',
-        //                         ],
-        //                     ],
-        //                 ],
-        //             ],
-        //         ],
-        //         [
-        //             'text' => 'level_one',
-        //             'url' => '#',
-        //         ],
-        //     ],
-        // ],
+        [
+            'text' => 'Users',
+            'icon' => 'fas fa-fw fa-user',
+            'submenu' => [
+                [
+                    'text' => 'Add New',
+                    'url' => 'users/create',
+                ],
+                [
+                    'text' => 'List All',
+                    'url' => 'users',
+                ]
+            ],
+        ],
         // ['header' => 'labels'],
         // [
         //     'text' => 'important',

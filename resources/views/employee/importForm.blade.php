@@ -12,30 +12,14 @@
         <div class="col-md-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Import Certificate Data</h3>
+                    <h3 class="card-title">Import Employee Data</h3>
                 </div>
 
 
-                <form action="{{ route('import.excel') }}" enctype="multipart/form-data" method="POST">
+                <form action="{{ route('import.employee.excel') }}" enctype="multipart/form-data" method="POST">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="name">Certificate Title</label>
-                                        <input type="text" class="form-control" id="name" name="name"
-                                            placeholder="Enter title">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="name">Year</label>
-                                        <input type="text" class="form-control" id="year" name="year"
-                                            placeholder="Year (2023-2024)">
-                                    </div>
-                                </div>
-                            </div>
                             <label for="exampleInputFile">Upload Excel</label>
                             <div class="input-group">
                                 <div class="custom-file">

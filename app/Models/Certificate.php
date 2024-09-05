@@ -8,14 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Certificate extends Model
 {
     use HasFactory;
+    protected $table = 'certificates';
     protected $fillable = [
-        'user_name',
-        'user_email',
-        'title',
+        'name',
         'employee_id',
-        'description',
+        'opco',
+        'title',
+        'year',
         'code',
-        'url'
+        'email',
+        'score'
     ];
-
+    public function fields(){
+        return $this->hasMany(CertificateFields::class, 'certificate_id', 'id');
+    }
 }

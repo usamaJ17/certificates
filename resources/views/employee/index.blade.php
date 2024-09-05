@@ -1,12 +1,12 @@
 @extends('adminlte::page')
 
-@section('title', 'View Certificates')
+@section('title', 'View Employees')
 
 @section('content_header')
-    <h1>View Certificates</h1>
+    <h1>View Employees</h1>
 @stop
 @section('content_header')
-    <h1>View Certificates</h1>
+    <h1>View Employees</h1>
 @stop
 
 @section('content')
@@ -15,30 +15,31 @@
         <div class="col-md-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">All Certificates</h3>
+                    <h3 class="card-title">All Employees</h3>
                 </div>
 
                 <div class="card-body">
                     <table class="table table-hover" id="myTable">
                         <thead>
                             <tr>
-                                <th>Certificate #</th>
-                                <th>User Name</th>
+                                <th>Name</th>
                                 <th>Employee ID</th>
                                 <th>Email</th>
-                                <th>Issued</th>
-                                <th>Actions</th>
+                                <th>Mobile Number</th>
+                                <th>Whats'app Number </th>
+                                <th>OPCO</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($certficates as $item)
+                            @foreach ($employees as $item)
                                 <tr>
-                                    <td>{{ '#'.$item->code }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->employee_id }}</td>
                                     <td>{{ $item->email }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($item->created_at)->format('F Y') }}
-                                    </td>
+                                    <td>{{ $item->phone }}</td>
+                                    <td>{{ $item->whatsapp }}</td>
+                                    <td>{{ $item->opco }}</td>                                    
                                     <td><i class="text-info fas fa-eye"></i> &nbsp;&nbsp; <i class="text-warning fas fa-edit"></i> &nbsp;&nbsp; <i class="text-danger fas fa-trash"></i></td>
                                 </tr>
                             @endforeach

@@ -11,18 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('certificates', function (Blueprint $table) {
+        Schema::create('certificate_fields', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('email')->nullable();
-            $table->string('title')->nullable();
-            $table->string('opco')->nullable();
-            $table->string('code')->nullable();
-            $table->string('url')->nullable();
-            $table->string('employee_id')->nullable();
             $table->float('score')->default(0.0)->nullable();
-            $table->string('year')->nullable();
-            $table->string('status')->nullable();
+            $table->unsignedBigInteger('certificate_id');
+            $table->foreign('certificate_id')->references('id')->on('certificates')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -32,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('certificates');
+        Schema::dropIfExists('certificate_fields');
     }
 };
