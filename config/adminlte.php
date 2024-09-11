@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+
 return [
 
     /*
@@ -292,99 +294,68 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Menu-Configuration
     |
     */
-
     'menu' => [
-        // Navbar items:
-        // [
-        //     'type' => 'navbar-search',
-        //     'text' => 'search',
-        //     'topnav_right' => true,
-        // ],
         [
             'type' => 'fullscreen-widget',
             'topnav_right' => true,
+            'can' => 'team-member',
         ],
-
-        // Sidebar items:
-        // [
-        //     'type' => 'sidebar-menu-search',
-        //     'text' => 'search',
-        // ],
-        // [
-        //     'text' => 'blog',
-        //     'url' => 'admin/blog',
-        //     'can' => 'manage-blog',
-        // ],
-        // [
-        //     'text' => 'pages',
-        //     'url' => 'admin/pages',
-        //     'icon' => 'far fa-fw fa-file',
-        //     'label' => 4,
-        //     'label_color' => 'success',
-        // ],
-        // ['header' => 'account_settings'],
         [
             'text' => 'Certificates',
             'icon' => 'fas fa-fw fa-user',
+            'can' => 'team-member',
             'submenu' => [
                 [
                     'text' => 'Add New',
                     'url' => 'admin/certificates/create',
+                    'can' => ['admin', 'super-admin'],
                 ],
                 [
                     'text' => 'Import',
                     'url' => 'admin/import',
+                    'can' => ['admin', 'super-admin'],
                 ],
                 [
                     'text' => 'List All',
                     'url' => 'admin/certificates',
+                    'can' => [ 'supervisor', 'super-admin'],
                 ]
             ],
         ],
         [
             'text' => 'Employees',
             'icon' => 'fas fa-fw fa-user',
+            'can' => 'team-member',
             'submenu' => [
                 [
                     'text' => 'Import',
                     'url' => 'admin/import/employees',
+                    'can' => ['admin', 'super-admin'],
                 ],
                 [
                     'text' => 'List All',
                     'url' => 'admin/employees',
+                    'can' => [ 'supervisor', 'super-admin'],
                 ]
             ],
         ],
         [
             'text' => 'Users',
             'icon' => 'fas fa-fw fa-user',
+            'can' => ['super-admin'],
             'submenu' => [
                 [
                     'text' => 'Add New',
                     'url' => 'users/create',
+                    'can' => ['super-admin'],
                 ],
                 [
                     'text' => 'List All',
                     'url' => 'users',
+                    'can' => ['super-admin'],
                 ]
             ],
         ],
-        // ['header' => 'labels'],
-        // [
-        //     'text' => 'important',
-        //     'icon_color' => 'red',
-        //     'url' => '#',
-        // ],
-        // [
-        //     'text' => 'warning',
-        //     'icon_color' => 'yellow',
-        //     'url' => '#',
-        // ],
-        // [
-        //     'text' => 'information',
-        //     'icon_color' => 'cyan',
-        //     'url' => '#',
-        // ],
     ],
 
     /*

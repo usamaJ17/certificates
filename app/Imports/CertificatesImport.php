@@ -31,7 +31,9 @@ class CertificatesImport implements ToModel, WithHeadingRow, WithCalculatedFormu
                 $score = $row['overall_score'];
             }elseif(isset($row['overall_score_per_participant'])){
                 $score = $row['overall_score_per_participant'];
-
+            }
+            if($score <= 1){
+                $score = number_format((float)($score * 100), 0, '.', '');
             }
             return new Certificate([
                 'name' => $row['names'],
