@@ -4,11 +4,12 @@ use App\Http\Controllers\CertificatesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return redirect('/admin/certificates');
+    return view('welcome');
 });
 
 Auth::routes();
@@ -33,3 +34,11 @@ Route::middleware('auth')->group(function () {
 Route::get('certificates/verify', [CertificatesController::class, 'certForm'])->name('certificates.form');
 Route::post('certificates/verify', [CertificatesController::class, 'certVerify'])->name('certificates.verify');
 Route::get('certificates/view/{code}', [CertificatesController::class, 'publicView'])->name('certificates.view');
+
+
+Route::get('clear_cache', function(){
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('route:clear');
+    return 'Cleared!';
+});

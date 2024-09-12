@@ -31,10 +31,10 @@ class AppServiceProvider extends ServiceProvider
         });
     
         Gate::define('super-admin', function ($user) {
-            return $user->hasRole('super-admin');
+            return $user->hasRole('super_admin');
         });
         Gate::define('team-member', function ($user) {
-            if ($user->hasRole('super-admin') || $user->hasRole('admin') || $user->hasRole('supervisor')) {
+            if ($user->hasRole('super_admin') || $user->hasRole('admin') || $user->hasRole('supervisor')) {
                 if(Route::is('certificates.view') || Route::is('certificates.form')) {
                     return false;                    
                 }

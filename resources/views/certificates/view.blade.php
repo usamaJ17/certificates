@@ -1,435 +1,166 @@
-{{ Config::set('adminlte.layout_topnav', true) }}
-@extends('adminlte::page')
+<!DOCTYPE html>
+<html>
 
-@section('title', 'Import')
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/creativetimofficial/tailwind-starter-kit/compiled-tailwind.min.css" />
+    <title>EFS Certification Portal</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
 
-@section('content_header')
-    <p></p>
-@stop
-
-@section('content_header')
-    <p></p>
-@stop
-
-@section('content')
-    <div class="row">
-
-        <div class="col-lg-9">
-            <div class="card ">
-                <div class="card-body">
-                    <img src="{{ asset($image) }}" alt="Certificate Image">
-                    <div class="overlay-text overlay-text_first" style="font-family: Arial, Helvetica, sans-serif">
-                        Certificate of Completion
-                    </div>
-                    <div class="overlay-text overlay-text_award" style="font-family: Arial, Helvetica, sans-serif">
-                        Awarded To
-                    </div>
-                    <div class="overlay-text overlay-text_name" style="font-family: Arial, Helvetica, sans-serif">
-                        {{ $certificate->name }}
-                    </div>
-                    <div class="overlay-text overlay-text_desc" style="font-family: Arial, Helvetica, sans-serif">
-                        Who has successfully completed <br> the {{ $certificate->title }} <br> Academic Year
-                        {{ $certificate->year }}
-                    </div>
-                    <div class="overlay-text overlay-text_reg" style="font-family: Arial, Helvetica, sans-serif">
-                        No. {{ $certificate->code }}
-                    </div>
-                    <div class="overlay-text overlay-text_sign"
-                        style="font-family: Arial, Helvetica, sans-serif;padding-top:3px">
-                        <span class="ceo_name"> Tariq Chauhan </span><br>
-                        <span> Group Chief Executive Officer </span>
-                    </div>
-                </div>
-
-
-                {{-- <form action="{{ route('import.excel') }}" enctype="multipart/form-data" method="POST">
-                    @csrf
-                    <div class="card-body">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="name">Certificate Title</label>
-                                        <input type="text" class="form-control" id="name" name="name"
-                                            placeholder="Enter title">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="name">Year</label>
-                                        <input type="text" class="form-control" id="year" name="year"
-                                            placeholder="Year (2023-2024)">
-                                    </div>
+<body class="text-gray-800 antialiased">
+    <nav class="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 ">
+        <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
+            <div class="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
+                <a href="#" class="inline-block mr-4 py-2">
+                    <img src="{{ asset('frontend/assets/img/logo.svg') }}" alt="Tailwind Starter Kit Logo"
+                        class="h-10">
+                </a>
+            </div>
+            <div class="lg:flex flex-grow items-center bg-white lg:bg-transparent lg:shadow-none hidden"
+                id="example-collapse-navbar">
+                <ul class="flex flex-col lg:flex-row list-none lg:ml-auto">
+                    <li class="flex items-center">
+                        <a class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                            href="https://www.facebook.com/efsme"><i
+                                class="lg:text-gray-300 text-gray-500 fab fa-facebook text-lg leading-lg "></i><span
+                                class="lg:hidden inline-block ml-2">Facebook</span></a>
+                    </li>
+                    <li class="flex items-center">
+                        <a class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                            href="https://www.linkedin.com/company/efs-facilities-services-group/mycompany/"><i
+                                class="lg:text-gray-300 text-gray-500 fab fa-linkedin text-lg leading-lg "></i><span
+                                class="lg:hidden inline-block ml-2">LinkedIn</span></a>
+                    </li>
+                    <li class="flex items-center">
+                        <a class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+                            href="#pablo"><i
+                                class="lg:text-gray-300 text-gray-500 fab fa-github text-lg leading-lg "></i><span
+                                class="lg:hidden inline-block ml-2">Star</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="profile-page">
+        <section class="relative block" style="height: 500px;">
+            <div class="absolute top-0 w-full h-full bg-center bg-cover"
+                style='background-image: url("https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1267&amp;q=80");'>
+                <span id="blackOverlay" class="w-full h-full absolute opacity-75 bg-gradient-to-r" style="background-image: linear-gradient(to right, #933EB6, #4E4EB1);"></span>
+            </div>
+            <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden"
+                style="height: 70px;">
+                <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg"
+                    preserveAspectRatio="none" version="1.1" viewBox="0 0 2560 100" x="0" y="0">
+                    <polygon class="text-gray-300 fill-current" points="2560 0 2560 100 0 100"></polygon>
+                </svg>
+            </div>
+        </section>
+        <section class="relative py-16 bg-gray-300">
+            <div class="container mx-auto px-4">
+                <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+                    <div class="px-6">
+                        <div class="flex flex-wrap justify-center">
+                            <div class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
+                                <div class="relative">
+                                    <img alt="..."
+                                        src="{{ asset('images/logo.jpeg') }}"
+                                        class="shadow-xl rounded-full h-auto align-middle border-none"
+                                        style="max-width: 150px;" />
                                 </div>
                             </div>
-                            <label for="exampleInputFile">Upload Excel</label>
-                            <div class="input-group">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="excel" id="exampleInputFile">
-                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                            <div class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
+                                <div class="py-6 px-3 mt-32 sm:mt-0">
+                                    <button
+                                        class="bg-gray-900 active:bg-gray-500 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
+                                        type="button" style="transition: all 0.15s ease 0s;"> 
+                                        <i class="fas fa-download"></i> Download
+                                    </button>
+                                    <button id="share_cert"
+                                        class="bg-gray-900 active:bg-gray-500 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
+                                        type="button" style="transition: all 0.15s ease 0s;">
+                                        <i class="fas fa-share-square"></i> Share
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-4/12 px-4 lg:order-1">
+                                <div class="flex justify-center py-4 lg:pt-4 pt-8">
+                                    <div class="mr-4 p-3 text-center">
+                                        <span
+                                            class="text-xl font-bold block uppercase tracking-wide text-gray-700">{{ $certificate->name }} Completed with a score of {{ $certificate->score }}%</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Import</button>
-                    </div>
-                </form> --}}
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Certificate Details</h3>
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title"><strong>Certificate Recipient:</strong></h3>
-                    <br>
-                    <h3 class="card-title">Usama Jalal</h3> <br>
-                    <h3 class="card-title"><strong>Issued by:</strong></h3>
-                    <br>
-                    <h3 class="card-title">EFS</h3> <br>
-                    <h3 class="card-title"><strong>Issued On:</strong></h3>
-                    <br>
-                    <h3 class="card-title">August 2024</h3> <br>
-                    <div class="row" style="margin-top:10px">
-                        <button class="col-5 btn bg-gradient-success btn-sm"><i class="fas fa-download"></i>
-                            Download</button>
-                        <div class="col-1"></div>
-                        <button id="share_cert" class="col-5 btn bg-gradient-info btn-sm"><i
-                                class="fas fa-share-square"></i>
-                            Share</button>
+                        <div class="text-center mt-12">
+                            <div class="mb-2 text-gray-700">
+                                <img src="{{ asset('images/test.png') }}" alt="" class="mx-auto">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
+        
+    </main>
+    <footer class="relative bg-white-300 pt-8 pb-6" style="margin-top: 0.12rem;">
+        <div class="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20"
+            style="height: 80px;">
+            <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="none" version="1.1" viewBox="0 0 2560 100" x="0" y="0">
+                <polygon class="text-white fill-current" points="2560 0 2560 100 0 100"></polygon>
+            </svg>
         </div>
-    </div>
-@stop
-
-@section('css')
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <style>
-        /* Default width for mobile devices */
-        .cus_width {
-            width: 100%;
-            /* Set a default width, will be overridden by media queries */
-        }
-
-        @media (min-width: 576px) {
-
-            .cus_width {
-                max-width: 540px !important;
-            }
-        }
-
-        @media (min-width: 768px) {
-
-            .cus_width {
-                max-width: 720px !important;
-            }
-        }
-
-        @media (min-width: 992px) {
-
-            .cus_width {
-                max-width: 960px !important;
-            }
-        }
-
-        @media (min-width: 1200px) {
-
-            .cus_width {
-                max-width: 1440px !important;
-            }
-        }
-
-        card-body {
-            position: relative;
-            display: inline-block;
-            /* Ensure container fits image width */
-            width: 100%;
-            /* Ensure container is responsive */
-            max-width: 600px;
-            /* Optional: limit the maximum width */
-            height: auto;
-            /* Maintain aspect ratio */
-        }
-
-        .card-body img {
-            width: 100%;
-            height: auto;
-            display: block;
-            /* Remove any bottom space */
-        }
-
-        .overlay-text {
-            position: absolute;
-        }
-
-        .overlay-text_first {
-            color: #002060;
-            font-weight: 500;
-        }
-
-        .overlay-text_award {
-            color: #002060;
-            font-weight: 500;
-        }
-
-        .overlay-text_name {
-            color: #002060;
-            font-weight: 500;
-        }
-
-        .overlay-text_desc {
-            color: #002060;
-            font-weight: 500;
-        }
-
-        .overlay-text_reg {
-            color: #002060;
-            font-weight: 400;
-        }
-
-        .overlay-text_sign {
-            color: #111111;
-            font-weight: 600;
-            border-top: 2px solid #111111;
-        }
-
-        @media (max-width: 320px) {
-
-            .overlay-text_first {
-                top: 17.5%;
-                left: 8%;
-                font-size: 10px;
-            }
-
-            .overlay-text_award {
-                top: 26.5%;
-                left: 8%;
-                font-size: 8px;
-            }
-
-            .overlay-text_name {
-                top: 30.5%;
-                left: 8%;
-                font-size: 17px;
-            }
-
-            .overlay-text_desc {
-                top: 44.5%;
-                left: 8%;
-                font-size: 8px;
-            }
-
-            .overlay-text_reg {
-                top: 68.5%;
-                left: 15.6%;
-                font-size: 4.5px;
-            }
-
-            .overlay-text_sign {
-                top: 85.9%;
-                left: 11.0%;
-                font-size: 5px;
-            }
-
-            .ceo_name {
-                margin-left: 25%;
-            }
-        }
-
-        @media (min-width: 321px) and (max-width: 430px) {
-
-            .overlay-text_first {
-                top: 15.5%;
-                left: 8%;
-                font-size: 12px;
-            }
-
-            .overlay-text_award {
-                top: 26.5%;
-                left: 8%;
-                font-size: 10px;
-            }
-
-            .overlay-text_name {
-                top: 30.5%;
-                left: 8%;
-                font-size: 21px;
-            }
-
-            .overlay-text_desc {
-                top: 43.5%;
-                left: 8%;
-                font-size: 11px;
-            }
-
-            .overlay-text_reg {
-                top: 70.2%;
-                left: 14%;
-                font-size: 6px;
-            }
-
-            .overlay-text_sign {
-                top: 87.9%;
-                left: 9.5%;
-                font-size: 7px;
-            }
-
-            .ceo_name {
-                margin-left: 25%;
-            }
-        }
-
-        @media (min-width: 768px) {
-
-            .overlay-text_first {
-                top: 13.5%;
-                left: 5%;
-                font-size: 19px;
-            }
-
-            .overlay-text_award {
-                top: 23.5%;
-                left: 5%;
-                font-size: 13px;
-            }
-
-            .overlay-text_name {
-                top: 27.5%;
-                left: 5%;
-                font-size: 41px;
-            }
-
-            .overlay-text_desc {
-                top: 41.5%;
-                left: 5%;
-                font-size: 21px;
-            }
-
-            .overlay-text_reg {
-                top: 70.9%;
-                left: 12.3%;
-                font-size: 12px;
-            }
-
-            .overlay-text_sign {
-                top: 89.9%;
-                left: 11.5%;
-                font-size: 10px;
-            }
-
-            .ceo_name {
-                margin-left: 25%;
-            }
-        }
-
-        @media (min-width: 992px) {
-
-            .overlay-text_first {
-                top: 12.5%;
-                left: 5%;
-                font-size: 22px;
-            }
-
-            .overlay-text_award {
-                top: 23.5%;
-                left: 5%;
-                font-size: 14px;
-            }
-
-            .overlay-text_name {
-                top: 27.5%;
-                left: 5%;
-                font-size: 41px;
-            }
-
-            .overlay-text_desc {
-                top: 41.5%;
-                left: 5%;
-                font-size: 22px;
-            }
-
-            .overlay-text_reg {
-                top: 70.9%;
-                left: 12.5%;
-                font-size: 12px;
-            }
-
-            .overlay-text_sign {
-                top: 89.9%;
-                left: 11.5%;
-                font-size: 10px;
-            }
-
-            .ceo_name {
-                margin-left: 25%;
-            }
-        }
-
-        @media (min-width: 1200px) {
-
-            .overlay-text_first {
-                top: 11.5%;
-                left: 5%;
-                font-size: 34px;
-            }
-
-            .overlay-text_award {
-                top: 23.5%;
-                left: 5%;
-                font-size: 16px;
-            }
-
-            .overlay-text_name {
-                top: 27.5%;
-                left: 5%;
-                font-size: 56px;
-            }
-
-            .overlay-text_desc {
-                top: 41.5%;
-                left: 5%;
-                font-size: 31px;
-            }
-
-            .overlay-text_reg {
-                top: 71.9%;
-                left: 11.5%;
-                font-size: 18px;
-            }
-
-            .overlay-text_sign {
-                top: 89.9%;
-                left: 11.5%;
-                font-size: 16px;
-            }
-
-            .ceo_name {
-                margin-left: 25%;
-            }
-        }
-    </style>
-@stop
-
-@section('js')
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script>
-        document.querySelector('.container').classList.add('cus_width');
-        $(document).ready(function() {
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap">
+                <div class="w-full lg:w-6/12 px-4">
+                    <h4 class="text-3xl font-semibold">Let's keep in touch!</h4>
+                    <h5 class="text-lg mt-0 mb-2 text-gray-700">
+                        Find us on any of these platforms
+                    </h5>
+                    <div class="mt-6">
+                        <button
+                            class="bg-white text-blue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
+                            type="button">
+                            <i class="flex fab fa-linkedin"></i></button><button
+                            class="bg-white text-blue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
+                            type="button">
+                            <i class="flex fab fa-facebook-square"></i></button>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-6 border-gray-400" />
+            <div class="flex flex-wrap items-center md:justify-between justify-center">
+                <div class="w-full md:w-4/12 px-4 mx-auto text-center">
+                    <div class="text-sm text-gray-600 font-semibold py-1">
+                        Copyright © 2024 EFS
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script>
+    function toggleNavbar(collapseID) {
+        document.getElementById(collapseID).classList.toggle("hidden");
+        document.getElementById(collapseID).classList.toggle("block");
+    }
+    $(document).ready(function() {
             $('#share_cert').on('click', function() {
                 navigator.clipboard.writeText(window.location.href);
                 Toastify({
-                    text: "Share Link Coppied",
+                    text: "Share Link Coppied !!",
                     duration: 3000,
-                    newWindow: true,
-                    close: true,
-                    gravity: "top", // `top` or `bottom`
-                    position: "left", // `left`, `center` or `right`
-                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    gravity: "top", 
+                    position: "right", 
+                    stopOnFocus: true, 
                     style: {
                         background: "linear-gradient(to right, #00b09b, #96c93d)",
                     },
@@ -437,5 +168,6 @@
             });
 
         });
-    </script>
-@stop
+</script>
+
+</html>
