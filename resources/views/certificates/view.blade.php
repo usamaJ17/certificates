@@ -38,10 +38,11 @@
                                 class="lg:hidden inline-block ml-2">LinkedIn</span></a>
                     </li>
                     <li class="flex items-center">
-                        <a class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-                            href="#pablo"><i
-                                class="lg:text-gray-300 text-gray-500 fab fa-github text-lg leading-lg "></i><span
-                                class="lg:hidden inline-block ml-2">Star</span></a>
+                        <a href="{{ route('login') }}"><button
+                                class="bg-gray-900 text-white active:bg-gray-500 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                                style="transition: all 0.15s ease 0s;">
+                                Login
+                            </button></a>
                     </li>
                 </ul>
             </div>
@@ -111,8 +112,8 @@
     <footer class="relative bg-white-300 pt-8 pb-6" style="margin-top: 0.12rem;">
         <div class="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20"
             style="height: 80px;">
-            <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg"
-                preserveAspectRatio="none" version="1.1" viewBox="0 0 2560 100" x="0" y="0">
+            <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
+                version="1.1" viewBox="0 0 2560 100" x="0" y="0">
                 <polygon class="text-white fill-current" points="2560 0 2560 100 0 100"></polygon>
             </svg>
         </div>
@@ -124,13 +125,16 @@
                         Find us on any of these platforms
                     </h5>
                     <div class="mt-6">
-                        <button
+                        <a href="https://www.linkedin.com/company/efs-facilities-services-group/mycompany"><button
                             class="bg-white text-blue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
                             type="button">
-                            <i class="flex fab fa-linkedin"></i></button><button
+                            <i class="flex fab fa-linkedin"></i></button>
+                        </a>
+                        <a href="https://www.facebook.com/efsme"><button
                             class="bg-white text-blue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
                             type="button">
                             <i class="flex fab fa-facebook-square"></i></button>
+                        </a>
                     </div>
                 </div>
             </div>
