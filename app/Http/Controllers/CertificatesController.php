@@ -30,24 +30,22 @@ class CertificatesController extends Controller
         if($certificate == null){
             abort(404);
         }
-        // $newFolderPath = storage_path('app/public/certificate/image'); // Path to the new folder in storage/app/public
-        // $filePath = $newFolderPath . '/' . $code . '.png';
-        // if (!file_exists($newFolderPath)) {
-        //     mkdir($newFolderPath, 0755, true);
-        // }
-        // $image = '';
-        // if (file_exists($filePath)) {
-        //     $image = asset('storage/certificate/image/' . $code . '.png'); // URL path for the new folder
-        // } else {
-        //     Browsershot::url('https://certificate.efs-me.com/certificates/template/6110633972')
-        //         ->setNodeBinary(storage_path('node/bin/node'))
-        //         ->setNpmBinary(storage_path('node/lib/node_modules/npm/bin/npm-cli.js'))
-        //         ->setChromePath(storage_path('chrome-linux/chrome'))
-        //         ->windowSize(1920, 1080)
-        //         ->save($filePath);
-        //     $image = asset('storage/certificate/image/' . $code . '.png'); // URL path for the new folder
-        // }
-        return view('certificates.view', compact('certificate'));
+        $newFolderPath = storage_path('app/public/certificate/image'); // Path to the new folder in storage/app/public
+        $filePath = $newFolderPath . '/' . $code . '.png';
+        if (!file_exists($newFolderPath)) {
+            mkdir($newFolderPath, 0755, true);
+        }
+        $image = '';
+        if (file_exists($filePath)) {
+            $image = asset('storage/certificate/image/' . $code . '.png'); // URL path for the new folder
+        } else {
+            Browsershot::url('https://certificate.efs-me.com/certificates/template/6110633972')
+                ->windowSize(1920, 1080)
+                ->save($filePath);
+            $image = asset('storage/certificate/image/' . $code . '.png'); // URL path for the new folder
+        }
+        dd($image);
+        return view('certificates.view', compact('certificate', 'image'));
     }
     public function generateTemplate($code)
     {
