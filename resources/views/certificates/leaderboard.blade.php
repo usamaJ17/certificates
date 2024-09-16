@@ -43,21 +43,33 @@
                                 style="transition: all 0.15s ease 0s;">
                                 Login
                             </button></a>
-                            <a href="{{ route('certificates.leader') }}"><button
-                                class="bg-gray-900 text-white active:bg-gray-500 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
-                                style="transition: all 0.15s ease 0s;">
-                                Leaderboard
-                            </button></a>
+                        <a href="{{ route('certificates.leader') }}"><button
+                            class="bg-gray-900 text-white active:bg-gray-500 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                            style="transition: all 0.15s ease 0s;">
+                            Leaderboard
+                        </button></a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
     <main class="profile-page">
-        <section class="relative block" style="height: 500px;">
+        <div class="relative pt-16 pb-32 flex content-center items-center justify-center" style="height: 500px;">
             <div class="absolute top-0 w-full h-full bg-center bg-cover"
                 style='background-image: url("https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1267&amp;q=80");'>
-                <span id="blackOverlay" class="w-full h-full absolute opacity-75 bg-gradient-to-r" style="background-image: linear-gradient(to right, #933EB6, #4E4EB1);"></span>
+                <span id="blackOverlay" class="w-full h-full absolute opacity-75 bg-gradient-to-r"
+                    style="background-image: linear-gradient(to right, #933EB6, #4E4EB1);"></span>
+            </div>
+            <div class="container relative mx-auto">
+                <div class="items-center flex flex-wrap">
+                    <div class="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
+                        <div class="pr-12">
+                            <h1 class="text-white font-semibold text-5xl">
+                                Our Top Performers
+                            </h1>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden"
                 style="height: 70px;">
@@ -66,70 +78,91 @@
                     <polygon class="text-white fill-current" points="2560 0 2560 100 0 100"></polygon>
                 </svg>
             </div>
-        </section>
+        </div>
         <section class="relative py-16 bg-white">
+            
             <div class="container mx-auto px-4">
-                <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+                <div
+                    class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
                     <div class="px-6">
                         <div class="flex flex-wrap justify-center">
                             <div class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
                                 <div class="relative">
-                                    <img alt="..."
-                                        src="{{ asset('images/logo.jpeg') }}"
+                                    <img alt="..." src="{{ asset('images/logo.jpeg') }}"
                                         class="shadow-xl rounded-full h-auto align-middle border-none"
                                         style="max-width: 150px;" />
                                 </div>
                             </div>
-                            <div class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
-                                <div class="py-6 px-3 mt-32 sm:mt-0">
-                                    <a href="{{ asset('frontend/assets/img/cert.png') }}" download><button
-                                        class="bg-gray-900 active:bg-gray-500 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
-                                        type="button" style="transition: all 0.15s ease 0s;"> 
-                                        <i class="fas fa-download"></i> Download
-                                    </button></a>
-                                    <button id="share_cert"
-                                        class="bg-gray-900 active:bg-gray-500 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
-                                        type="button" style="transition: all 0.15s ease 0s;">
-                                        <i class="fas fa-share-square"></i> Share
-                                    </button>
-                                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode('https://certificate.efs-me.com/certificates/view/'.$certificate->code) }}&title={{ urlencode('My Certificate') }}&summary={{ urlencode('Hello, this is my certificate') }}" >
-                                    <button
-                                        class="bg-gray-900 active:bg-gray-500 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
-                                        type="button" style="transition: all 0.15s ease 0s;"> 
-                                        <i class="fas fa-share-alt"></i> LinkedIn
-                                    </button></a>
-                                </div>
-                            </div>
-                            <div class="w-full lg:w-4/12 px-4 lg:order-1">
-                                <div class="flex justify-center py-4 lg:pt-4 pt-8">
-                                    <div class="mr-4 p-3 text-center">
-                                        <span
-                                            class="text-xl font-bold block uppercase tracking-wide text-gray-700">{{ $certificate->name }} Completed with a score of {{ $certificate->score }}%</span>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         <div class="text-center mt-12">
-                            <div class="mb-2 text-gray-300">
-                                <img src="{{ asset('frontend/assets/img/cert.png') }}" alt="" class="mx-auto" style="height: auto;width:90%;margin-bottom: 2rem;" >
+                            <div class="relative overflow-x-auto shadow-md sm:rounded-lg mb-8">
+                                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-3">
+                                                
+                                            </th>
+                                            <th scope="col" class="px-6 py-3">
+                                                Employee Name
+                                            </th>
+                                            <th scope="col" class="px-6 py-3">
+                                                Employee Name
+                                            </th>
+                                            <th scope="col" class="px-6 py-3">
+                                                Score
+                                            </th>
+                                            <th scope="col" class="px-6 py-3">
+                                                
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($certficates as $item)
+                                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                                <td class="px-6 py-4">
+                                                    {{ $loop->iteration }}
+                                                </td>
+                                                <th scope="row"
+                                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                    {{ $item->name }}
+                                                </th>
+                                                <td class="px-6 py-4">
+                                                    {{ $item->employee_id }}
+                                                </td>
+                                                <td class="px-6 py-4">
+                                                    {{ $item->score }}
+                                                </td>
+                                                <td class="px-6 py-4 text-right">
+                                                    <a href="{{ route('certificates.view', ['code' => $item->code]) }}"> 
+                                                        <button
+                                                            class="bg-gray-900 active:bg-gray-500 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
+                                                            type="button" style="transition: all 0.15s ease 0s;">
+                                                            <i class="fas fa-eye"></i> View
+                                                        </button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        
+
     </main>
     <footer class="relative bg-white-300 pt-8 pb-6" style="margin-top: 0.12rem;">
         <div class="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20"
             style="height: 80px;">
-            <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
-                version="1.1" viewBox="0 0 2560 100" x="0" y="0">
+            <svg class="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="none" version="1.1" viewBox="0 0 2560 100" x="0" y="0">
                 <polygon class="text-white fill-current" points="2560 0 2560 100 0 100"></polygon>
             </svg>
         </div>
         <div class="container mx-auto px-4">
-            
             <hr class="my-6 border-gray-400" />
             <div class="flex flex-wrap items-center md:justify-between justify-center">
                 <div class="w-full md:w-4/12 px-4 mx-auto text-center">
@@ -149,21 +182,8 @@
         document.getElementById(collapseID).classList.toggle("block");
     }
     $(document).ready(function() {
-            $('#share_cert').on('click', function() {
-                navigator.clipboard.writeText(window.location.href);
-                Toastify({
-                    text: "Share Link Coppied !!",
-                    duration: 3000,
-                    gravity: "top", 
-                    position: "right", 
-                    stopOnFocus: true, 
-                    style: {
-                        background: "linear-gradient(to right, #00b09b, #96c93d)",
-                    },
-                }).showToast();
-            });
 
-        });
+    });
 </script>
 
 </html>

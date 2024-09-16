@@ -16,6 +16,10 @@ class CertificatesController extends Controller
         $certficates = Certificate::all();
         return view('certificates.index', compact('certficates'));
     }
+    public function leaderBoard(){
+        $certficates = Certificate::orderBy('score', 'desc')->limit(10)->get();
+        return view('certificates.leaderboard', compact('certficates'));
+    }
     public function importForm()
     {
         return view('certificates.importForm');
@@ -26,21 +30,24 @@ class CertificatesController extends Controller
         if($certificate == null){
             abort(404);
         }
-        $newFolderPath = storage_path('app/public/certificate/image'); // Path to the new folder in storage/app/public
-        $filePath = $newFolderPath . '/' . $code . '.png';
-        if (!file_exists($newFolderPath)) {
-            mkdir($newFolderPath, 0755, true);
-        }
-        $image = '';
-        if (file_exists($filePath)) {
-            $image = asset('storage/certificate/image/' . $code . '.png'); // URL path for the new folder
-        } else {
-            Browsershot::url('https://certificate.efs-me.com/certificates/template/6110318861')
-                ->windowSize(1740, 980)
-                ->save($filePath);
-            $image = asset('storage/certificate/image/' . $code . '.png'); // URL path for the new folder
-        }
-        return view('certificates.view', compact('certificate', 'image'));
+        // $newFolderPath = storage_path('app/public/certificate/image'); // Path to the new folder in storage/app/public
+        // $filePath = $newFolderPath . '/' . $code . '.png';
+        // if (!file_exists($newFolderPath)) {
+        //     mkdir($newFolderPath, 0755, true);
+        // }
+        // $image = '';
+        // if (file_exists($filePath)) {
+        //     $image = asset('storage/certificate/image/' . $code . '.png'); // URL path for the new folder
+        // } else {
+        //     Browsershot::url('https://certificate.efs-me.com/certificates/template/6110633972')
+        //         ->setNodeBinary(storage_path('node/bin/node'))
+        //         ->setNpmBinary(storage_path('node/lib/node_modules/npm/bin/npm-cli.js'))
+        //         ->setChromePath(storage_path('chrome-linux/chrome'))
+        //         ->windowSize(1920, 1080)
+        //         ->save($filePath);
+        //     $image = asset('storage/certificate/image/' . $code . '.png'); // URL path for the new folder
+        // }
+        return view('certificates.view', compact('certificate'));
     }
     public function generateTemplate($code)
     {
@@ -70,6 +77,11 @@ class CertificatesController extends Controller
     {
         return view('certificates.form');
     }
+    public function editCert($code){
+        $certificate = Certificate::with('fields')->where('code', $code)->first();
+        return view('certificates.edit', compact('certificate'));
+    }
+    
     public function certVerify(Request $request)
     {
         $cert = Certificate::where('code', $request->code)->first();
@@ -98,8 +110,31 @@ class CertificatesController extends Controller
                 CertificateFields::create([
                     'certificate_id' => $certificate->id,
                     'name' => $mark,
-                    'value' => $mark_value,
+                    'score' => $mark_value,
                 ]);
+            }
+        }
+        return redirect()->route('admin.certificates.view')->with('success', 'Certificate created successfully');
+    }
+
+    public function update(Request $request){
+        $certificate = Certificate::find($request->cert_id);
+        if($certificate){
+            $certificate->update($request->all());
+            CertificateFields::where('certificate_id', $request->cert_id)->delete();
+            foreach ($request->all() as $key => $value) {
+                if (strpos($key, 'mark_') === 0) {
+                    $index = substr($key, 5); // Get the index from the key (e.g., '2' from 'mark_2')
+                    $mark = $value;
+                    $mark_value = $request->input('value_' . $index);
+    
+                    // Create the CertificateField
+                    CertificateFields::create([
+                        'certificate_id' => $certificate->id,
+                        'name' => $mark,
+                        'score' => $mark_value,
+                    ]);
+                }
             }
         }
         return redirect()->route('admin.certificates.view')->with('success', 'Certificate created successfully');

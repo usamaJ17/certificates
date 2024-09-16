@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Auth::routes();
 
@@ -29,12 +29,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('certificates/delete/{id}', [CertificatesController::class, 'deleteCert'])->name('certificates.delete');
     Route::get('admin/certificates/create', [CertificatesController::class, 'create'])->name('admin.certificates.create');
     Route::post('admin/certificates/create', [CertificatesController::class, 'store'])->name('admin.certificates.save');
+    Route::get('admin/certificates/edit/{code}', [CertificatesController::class, 'editCert'])->name('admin.certificates.edit');
+    Route::put('admin/certificates/update', [CertificatesController::class, 'update'])->name('admin.certificates.update');
     Route::resource('users', UserController::class);
 });
 Route::get('certificates/verify', [CertificatesController::class, 'certForm'])->name('certificates.form');
 Route::post('certificates/verify', [CertificatesController::class, 'certVerify'])->name('certificates.verify');
 Route::get('certificates/view/{code}', [CertificatesController::class, 'publicView'])->name('certificates.view');
 
+Route::get('certificates/leaderboard', [CertificatesController::class, 'leaderBoard'])->name('certificates.leader');
 Route::get('certificates/image/{code}', [CertificatesController::class, 'getImage'])->name('certificates.image');
 Route::get('certificates/template/{code}', [CertificatesController::class, 'generateTemplate'])->name('certificates.template');
 

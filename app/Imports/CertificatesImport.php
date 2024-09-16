@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\Certificate;
+use App\Models\CertificateFields;
 use App\Models\Employee;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;
@@ -12,6 +13,7 @@ class CertificatesImport implements ToModel, WithHeadingRow, WithCalculatedFormu
 {
     private $title;
     private $year;
+    private $cus_title = [];
     public function __construct($title , $year)
     {
         $this->title = $title;
@@ -24,6 +26,18 @@ class CertificatesImport implements ToModel, WithHeadingRow, WithCalculatedFormu
      */
     public function model(array $row)
     {
+        // if its first row
+        if(empty($this->cus_title)){
+            foreach ($row as $key => $value) {
+                    if ($key === 'name' || $key === 'opco' || is_int($key)) {
+                        foreach ($row as $key => $value) {
+                            if($value != null){
+                                $this->cus_title[$key] = $value;
+                            }
+                        }
+                    }
+            }
+        }
         if($row['names'] != "" && $row['names'] != null){
             $employee = Employee::where('name', $row['names'])->first();
             $score = 0;
@@ -35,7 +49,7 @@ class CertificatesImport implements ToModel, WithHeadingRow, WithCalculatedFormu
             if($score <= 1){
                 $score = number_format((float)($score * 100), 0, '.', '');
             }
-            return new Certificate([
+            $cert = Certificate::create([
                 'name' => $row['names'],
                 'employee_id' => $employee ? $employee->employee_id : null,
                 'email' => $employee ? $employee->email : null,
@@ -45,6 +59,17 @@ class CertificatesImport implements ToModel, WithHeadingRow, WithCalculatedFormu
                 'title' => $this->title,
                 'year' => $this->year
             ]);
+            unset($this->cus_title['opco'], $this->cus_title['names'], $this->cus_title['overall_score'], $this->cus_title['overall_score_per_participant']);
+            foreach ($this->cus_title as $c_key => $c_value) {
+                if (is_numeric($row[$c_key])){
+                    CertificateFields::create([
+                        'certificate_id' => $cert->id,
+                        'name' => $c_value,
+                        'score' => number_format((float)($row[$c_key] * 100), 0, '.', ''),
+                    ]);
+                }
+            }
+            return $cert;
         }
     }
     public function generateTenDigitNumber() {

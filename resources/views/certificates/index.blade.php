@@ -74,7 +74,7 @@
             data: null,
             render: function(data, type, row) {
                 return `<a href="/certificates/view/${row.code}" <i class="text-info btn-sm fas fa-eye"></i> </a>&nbsp;&nbsp; 
-                        <i class="text-warning fas fa-edit"></i> &nbsp;&nbsp; 
+                        <a href="/admin/certificates/edit/${row.code}" <i class="text-warning fas fa-edit btn-sm"></i> </a>&nbsp;&nbsp;        
                         <i class="text-danger fas fa-trash delete_cert" data-id="${row.id}"></i>`;
             }
         }
