@@ -36,7 +36,7 @@ class CertificatesController extends Controller
             $image = asset('storage/certificate/image/' . $code . '.png'); // URL path for the new folder
         } else {
             Browsershot::url('https://certificate.efs-me.com/certificates/template/6110318861')
-                ->windowSize(1920, 1080)
+                ->windowSize(1740, 980)
                 ->save($filePath);
             $image = asset('storage/certificate/image/' . $code . '.png'); // URL path for the new folder
         }

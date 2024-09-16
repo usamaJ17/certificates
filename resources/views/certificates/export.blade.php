@@ -279,30 +279,30 @@
             .overlay-text_award {
                 top: 23.5%;
                 left: 5%;
-                font-size: 22px;
+                font-size: 25px;
             }
 
             .overlay-text_name {
                 top: 28.5%;
                 left: 5%;
-                font-size: 62px;
+                font-size: 59px;
             }
 
             .overlay-text_desc {
                 top: 44.5%;
                 left: 5%;
-                font-size: 37px;
+                font-size: 40px;
             }
 
             .overlay-text_reg {
-                top: 73.9%;
-                left: 11.5%;
-                font-size: 22px;
+                top: 73.7%;
+                left: 11.4%;
+                font-size: 27px;
             }
 
             .overlay-text_sign {
                 top: 91.9%;
-                left: 9.5%;
+                left: 10.3%;
                 font-size: 16px;
             }
 
