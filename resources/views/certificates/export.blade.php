@@ -95,7 +95,7 @@
             border-top: 2px solid #111111;
         }
 
-        @media (max-width: 320px) {
+        /* @media (max-width: 320px) {
 
             .overlay-text_first {
                 top: 17.5%;
@@ -265,12 +265,12 @@
             .ceo_name {
                 margin-left: 25%;
             }
-        }
+        } */
 
         @media (min-width: 1200px) {
 
             .overlay-text_first {
-                top: 11.5%;
+                top: 9.5%;
                 left: 5%;
                 font-weight: 600;
                 font-size: 43px;
@@ -283,26 +283,26 @@
             }
 
             .overlay-text_name {
-                top: 27.5%;
+                top: 28.5%;
                 left: 5%;
-                font-size: 56px;
+                font-size: 62px;
             }
 
             .overlay-text_desc {
-                top: 41.5%;
+                top: 44.5%;
                 left: 5%;
-                font-size: 31px;
+                font-size: 37px;
             }
 
             .overlay-text_reg {
-                top: 71.9%;
+                top: 73.9%;
                 left: 11.5%;
-                font-size: 18px;
+                font-size: 22px;
             }
 
             .overlay-text_sign {
-                top: 89.9%;
-                left: 11.5%;
+                top: 91.9%;
+                left: 9.5%;
                 font-size: 16px;
             }
 
@@ -313,34 +313,29 @@
     </style>
 </head>
 <body>
-    <div class="row">
-
-        <div class="col-12">
-            <div class="card ">
-                <div class="card-body">
-                    <img src="{{ asset($image) }}" alt="Certificate Image">
-                    <div class="overlay-text overlay-text_first" style="font-family: Arial, Helvetica, sans-serif">
-                        Certificate of Completion
-                    </div>
-                    <div class="overlay-text overlay-text_award" style="font-family: Arial, Helvetica, sans-serif">
-                        Awarded To
-                    </div>
-                    <div class="overlay-text overlay-text_name" style="font-family: Arial, Helvetica, sans-serif">
-                        {{ $certificate->name }}
-                    </div>
-                    <div class="overlay-text overlay-text_desc" style="font-family: Arial, Helvetica, sans-serif">
-                        Who has successfully completed <br> the {{ $certificate->title }} <br> Academic Year
-                        {{ $certificate->year }}
-                    </div>
-                    <div class="overlay-text overlay-text_reg" style="font-family: Arial, Helvetica, sans-serif">
-                        No. {{ $certificate->code }}
-                    </div>
-                    <div class="overlay-text overlay-text_sign"
-                        style="font-family: Arial, Helvetica, sans-serif;padding-top:3px">
-                        <span class="ceo_name"> Tariq Chauhan </span><br>
-                        <span> Group Chief Executive Officer </span>
-                    </div>
-                </div>
+    <div class="card ">
+        <div class="card-body" style="padding: 0">
+            <img src="{{ asset($image) }}" alt="Certificate Image">
+            <div class="overlay-text overlay-text_first" style="font-family: Arial, Helvetica, sans-serif">
+                Certificate of Completion
+            </div>
+            <div class="overlay-text overlay-text_award" style="font-family: Arial, Helvetica, sans-serif">
+                Awarded To
+            </div>
+            <div class="overlay-text overlay-text_name" style="font-family: Arial, Helvetica, sans-serif">
+                {{ $certificate->name }}
+            </div>
+            <div class="overlay-text overlay-text_desc" style="font-family: Arial, Helvetica, sans-serif">
+                Who has successfully completed <br> the {{ $certificate->title }} <br> Academic Year
+                {{ $certificate->year }}
+            </div>
+            <div class="overlay-text overlay-text_reg" style="font-family: Arial, Helvetica, sans-serif">
+                No. {{ $certificate->code }}
+            </div>
+            <div class="overlay-text overlay-text_sign"
+                style="font-family: Arial, Helvetica, sans-serif;padding-top:3px">
+                <span class="ceo_name"> Tariq Chauhan </span><br>
+                <span> Group Chief Executive Officer </span>
             </div>
         </div>
     </div>
