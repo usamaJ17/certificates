@@ -100,7 +100,7 @@
                         </div>
                         <div class="text-center mt-12">
                             <div class="mb-2 text-gray-700">
-                                <img src="{{ asset('images/test.png') }}" alt="" class="mx-auto">
+                                <img src="{{ asset($image) }}" alt="" class="mx-auto" style="height: auto;width:90%;margin-bottom: 2rem;" >
                             </div>
                         </div>
                     </div>

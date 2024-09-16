@@ -7,6 +7,7 @@ use App\Models\Certificate;
 use App\Models\CertificateFields;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use Spatie\Browsershot\Browsershot;
 
 class CertificatesController extends Controller
 {
@@ -22,6 +23,30 @@ class CertificatesController extends Controller
     public function publicView($code)
     {
         $certificate = Certificate::where('code', $code)->first();
+        if($certificate == null){
+            abort(404);
+        }
+        $newFolderPath = storage_path('app/public/certificate/image'); // Path to the new folder in storage/app/public
+        $filePath = $newFolderPath . '/' . $code . '.png';
+        if (!file_exists($newFolderPath)) {
+            mkdir($newFolderPath, 0755, true);
+        }
+        $image = '';
+        if (file_exists($filePath)) {
+            $image = asset('storage/certificate/image/' . $code . '.png'); // URL path for the new folder
+        } else {
+            Browsershot::url('https://certificate.efs-me.com/certificates/template/6110318861')
+                ->setNodeBinary(storage_path('node/bin/node'))
+                ->setNpmBinary(storage_path('node/bin/npm'))
+                ->windowSize(1920, 1080)
+                ->save($filePath);
+            $image = asset('storage/certificate/image/' . $code . '.png'); // URL path for the new folder
+        }
+        return view('certificates.view', compact('certificate', 'image'));
+    }
+    public function generateTemplate($code)
+    {
+        $certificate = Certificate::where('code', $code)->first();
         $image = 'images/blank.jpg';
         if ($certificate->score >= 75 && $certificate->score <= 79) {
             $image = 'images/silver.jpg';
@@ -30,7 +55,7 @@ class CertificatesController extends Controller
         } elseif ($certificate->score >= 85 && $certificate->score <= 100) {
             $image = 'images/platinum.jpg';
         }
-        return view('certificates.view', compact('certificate','image'));
+        return view('certificates.export', compact('certificate', 'image'));
     }
 
     public function importData(Request $request)

@@ -35,6 +35,9 @@ Route::get('certificates/verify', [CertificatesController::class, 'certForm'])->
 Route::post('certificates/verify', [CertificatesController::class, 'certVerify'])->name('certificates.verify');
 Route::get('certificates/view/{code}', [CertificatesController::class, 'publicView'])->name('certificates.view');
 
+Route::get('certificates/image/{code}', [CertificatesController::class, 'getImage'])->name('certificates.image');
+Route::get('certificates/template/{code}', [CertificatesController::class, 'generateTemplate'])->name('certificates.template');
+
 
 Route::get('clear_cache', function(){
     Artisan::call('cache:clear');

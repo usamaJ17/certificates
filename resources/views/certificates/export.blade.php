@@ -1,114 +1,11 @@
-{{ Config::set('adminlte.layout_topnav', true) }}
-@extends('adminlte::page')
-
-@section('title', 'Import')
-
-@section('content_header')
-    <p></p>
-@stop
-
-@section('content_header')
-    <p></p>
-@stop
-
-@section('content')
-    <div class="row">
-
-        <div class="col-lg-9">
-            <div class="card ">
-                <div class="card-body">
-                    <img src="{{ asset($image) }}" alt="Certificate Image">
-                    <div class="overlay-text overlay-text_first" style="font-family: Arial, Helvetica, sans-serif">
-                        Certificate of Completion
-                    </div>
-                    <div class="overlay-text overlay-text_award" style="font-family: Arial, Helvetica, sans-serif">
-                        Awarded To
-                    </div>
-                    <div class="overlay-text overlay-text_name" style="font-family: Arial, Helvetica, sans-serif">
-                        {{ $certificate->name }}
-                    </div>
-                    <div class="overlay-text overlay-text_desc" style="font-family: Arial, Helvetica, sans-serif">
-                        Who has successfully completed <br> the {{ $certificate->title }} <br> Academic Year
-                        {{ $certificate->year }}
-                    </div>
-                    <div class="overlay-text overlay-text_reg" style="font-family: Arial, Helvetica, sans-serif">
-                        No. {{ $certificate->code }}
-                    </div>
-                    <div class="overlay-text overlay-text_sign"
-                        style="font-family: Arial, Helvetica, sans-serif;padding-top:3px">
-                        <span class="ceo_name"> Tariq Chauhan </span><br>
-                        <span> Group Chief Executive Officer </span>
-                    </div>
-                </div>
-
-
-                {{-- <form action="{{ route('import.excel') }}" enctype="multipart/form-data" method="POST">
-                    @csrf
-                    <div class="card-body">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="name">Certificate Title</label>
-                                        <input type="text" class="form-control" id="name" name="name"
-                                            placeholder="Enter title">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="name">Year</label>
-                                        <input type="text" class="form-control" id="year" name="year"
-                                            placeholder="Year (2023-2024)">
-                                    </div>
-                                </div>
-                            </div>
-                            <label for="exampleInputFile">Upload Excel</label>
-                            <div class="input-group">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="excel" id="exampleInputFile">
-                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Import</button>
-                    </div>
-                </form> --}}
-            </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Certificate Details</h3>
-                </div>
-                <div class="card-body">
-                    <h3 class="card-title"><strong>Certificate Recipient:</strong></h3>
-                    <br>
-                    <h3 class="card-title">Usama Jalal</h3> <br>
-                    <h3 class="card-title"><strong>Issued by:</strong></h3>
-                    <br>
-                    <h3 class="card-title">EFS</h3> <br>
-                    <h3 class="card-title"><strong>Issued On:</strong></h3>
-                    <br>
-                    <h3 class="card-title">August 2024</h3> <br>
-                    <div class="row" style="margin-top:10px">
-                        <button class="col-5 btn bg-gradient-success btn-sm"><i class="fas fa-download"></i>
-                            Download</button>
-                        <div class="col-1"></div>
-                        <button id="share_cert" class="col-5 btn bg-gradient-info btn-sm"><i
-                                class="fas fa-share-square"></i>
-                            Share</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-@stop
-
-@section('css')
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <style>
         /* Default width for mobile devices */
         .cus_width {
@@ -375,13 +272,14 @@
             .overlay-text_first {
                 top: 11.5%;
                 left: 5%;
-                font-size: 34px;
+                font-weight: 600;
+                font-size: 43px;
             }
 
             .overlay-text_award {
                 top: 23.5%;
                 left: 5%;
-                font-size: 16px;
+                font-size: 22px;
             }
 
             .overlay-text_name {
@@ -413,29 +311,38 @@
             }
         }
     </style>
-@stop
+</head>
+<body>
+    <div class="row">
 
-@section('js')
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script>
-        document.querySelector('.container').classList.add('cus_width');
-        $(document).ready(function() {
-            $('#share_cert').on('click', function() {
-                navigator.clipboard.writeText(window.location.href);
-                Toastify({
-                    text: "Share Link Coppied",
-                    duration: 3000,
-                    newWindow: true,
-                    close: true,
-                    gravity: "top", // `top` or `bottom`
-                    position: "left", // `left`, `center` or `right`
-                    stopOnFocus: true, // Prevents dismissing of toast on hover
-                    style: {
-                        background: "linear-gradient(to right, #00b09b, #96c93d)",
-                    },
-                }).showToast();
-            });
-
-        });
-    </script>
-@stop
+        <div class="col-12">
+            <div class="card ">
+                <div class="card-body">
+                    <img src="{{ asset($image) }}" alt="Certificate Image">
+                    <div class="overlay-text overlay-text_first" style="font-family: Arial, Helvetica, sans-serif">
+                        Certificate of Completion
+                    </div>
+                    <div class="overlay-text overlay-text_award" style="font-family: Arial, Helvetica, sans-serif">
+                        Awarded To
+                    </div>
+                    <div class="overlay-text overlay-text_name" style="font-family: Arial, Helvetica, sans-serif">
+                        {{ $certificate->name }}
+                    </div>
+                    <div class="overlay-text overlay-text_desc" style="font-family: Arial, Helvetica, sans-serif">
+                        Who has successfully completed <br> the {{ $certificate->title }} <br> Academic Year
+                        {{ $certificate->year }}
+                    </div>
+                    <div class="overlay-text overlay-text_reg" style="font-family: Arial, Helvetica, sans-serif">
+                        No. {{ $certificate->code }}
+                    </div>
+                    <div class="overlay-text overlay-text_sign"
+                        style="font-family: Arial, Helvetica, sans-serif;padding-top:3px">
+                        <span class="ceo_name"> Tariq Chauhan </span><br>
+                        <span> Group Chief Executive Officer </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
